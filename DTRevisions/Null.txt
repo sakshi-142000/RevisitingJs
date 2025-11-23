@@ -1,0 +1,33 @@
+Null: null value to a variable in js is to signify 
+"Intentional absence of any object value"
+"Or, clearing the variable's reference to any object that it may be holding before"
+
+1. Clearing a reference: 
+>> For Memory Management
+>>lets say variable held a reference to large object, 
+you are done with the object, in this case, setting variabe to
+null is good practice 
+>> it signals js engine's garbage collector that memory
+previously occupied by that object can be safely reclaimed,
+there is no one referencing it. 
+
+**Basically clearing memory**
+
+2. Assigning null value to var for future object Assignment
+
+>> when you want to declare a variable, and knowing that 
+you will later assign an object(can be DOM element, database connection or user profile) to it
+
+>> so for now, assign it null value.
+>> null: means, variable is meant to hold an object but
+currently its deliverately empty (temporary)
+
+3. Also to differentiate from the "undefined" value
+undefined: you declare a variable but didnot initialise it
+>> value gets the undefined value. 
+
+Now, instead of leaving the var unintialised, you assign it a null value
+>> this means I know that the var exists, and I intentionally assigned it the value null, empty
+
+so that in future, you can make it assign a object reference or any value
+

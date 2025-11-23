@@ -1,0 +1,66 @@
+
+Ways to handle Strings in JS
+
+1. Template Literals:
+    - Use backticks (``) to create multi-line strings and embed expressions.
+    - Example:
+      ```javascript
+      let name = "John";
+      let greeting = `Hello, ${name}!
+      Welcome to the world of JavaScript.`;
+      console.log(greeting);
+      ```
+
+2. JS String Delimiters:
+
+    - Single Quotes (' '): Used for defining strings.
+      Example: `let singleQuoteString = 'Hello World';`
+    - Double Quotes (" "): Also used for defining strings.
+      Example: `let doubleQuoteString = "Hello World";`
+    - Backticks (` `): Used for template literals, allowing multi-line strings and expression embedding.
+      Example: `let backtickString = `Hello ${name}`;`
+
+3. Multi-line Strings in JavaScript
+The key difference is how JavaScript handles the physical newline character 
+(when you press the Enter key) within the string definition itself.
+
+1. With Single or Double Quotes (' or ")
+If you try to press Enter (insert a physical newline) 
+while defining a string with single or double quotes, 
+JavaScript's parser throws a SyntaxError.❌ Incorrect (Will Throw an Error)JavaScript// This will cause a SyntaxError: Unexpected token ILLEGAL (or similar)
+let quoteString = "This is the first line. 
+This is the second line."; 
+
+Why the Error?
+The JS specification dictates that 
+single and double quotes must enclose a string on a single line of code. 
+The parser sees the newline character as an unexpected break in the string definition.✅ 
+Correct Way with Quotes (Requires \n)
+To achieve a multi-line output using quotes, 
+you must explicitly use the escape sequence for a newline: 
+let correctQuoteString = "This is the first line.\nThis is the second line.";
+
+console.log(correctQuoteString);
+/*
+Output:
+This is the first line.
+This is the second line.
+*/
+
+
+2. With Backticks (Template Literals)
+Template literals were introduced to solve this exact problem. 
+They inherently recognize the physical newline character 
+entered by the developer as part of the string content.
+Correct Way with Backticks (Natural) 
+backtickString = `This is the first line.
+This is the second line.
+    And this line is indented.`;
+
+console.log(backtickString);
+/*
+Output:
+This is the first line.
+This is the second line.
+    And this line is indented.
+*/
