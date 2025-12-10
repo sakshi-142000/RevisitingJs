@@ -1,0 +1,20 @@
+Type Coercion and Loose Comparison (==)
+
+automatic conversion of data types that happen 
+when using operators (the == operator)
+that require operands of same type. 
+
+The Abstract Equality Comparison Algorithm
+
+When using a==b, js engine follows the below algo:
+1. if a and b are of same type:  check A===B
+2. if one of null and other is undefined, return true
+3. if one if number, other is string, compare string to number and then compare
+4. if one if boolean, conver boolean to number and then compare the results. 
+
+
+
+Therefore, we have Strict Comparison(===) in js
+
+Strict comparison (===) does not perform type coercion.
+
