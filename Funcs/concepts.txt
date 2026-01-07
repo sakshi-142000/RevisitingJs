@@ -1,0 +1,78 @@
+JavaScript Global Execution Context (GEC), Hoisting and TDZ
+
+1. What is the Global Execution Context?
+When you run a JavaScript file (source code), the browser or Node.js environment doesn't just run it instantly. First, it creates a container called the Global Execution Context.
+This context is created in two distinct phases:
+1. Phase 1: Memory Phase (Creation Phase)
+2. Phase 2: Code Phase (Execution/Thread Phase).
+
+2. The Two Phases Explained
+Phase 1: Memory Phase
+Before executing a single line of code, JavaScript scans the entire code to identify variables and functions.
+* For Variables (var): It allocates memory space and assigns them a special placeholder value: undefined. It does not assign the actual value (like 10 or 20) yet.
+* For Functions: It stores the entire function body in memory.
+Phase 2: Code Phase
+This is where the code is actually executed line-by-line.
+* Variables are updated from undefined to their actual values (e.g., x = 10).
+* Function calls are executed.
+
+3. Code Example: How var Works
+Let's look at a simple example using var.
+The Code:
+console.log(x); // Line 1
+var x = 10;     // Line 2
+console.log(x); // Line 3
+Step-by-Step Execution:
+1. Memory Phase:
+    * JS sees var x. It allocates memory for x and sets it to undefined.
+    * Memory State: x: undefined.
+2. Code Phase:
+    * Line 1: console.log(x) runs. It looks in memory, finds x is undefined, and prints undefined.
+    * Line 2: x = 10 runs. JS updates the memory. x is now 10.
+    * Line 3: console.log(x) runs. It finds 10 in memory and prints 10.
+Result: The output is undefined followed by 10. This phenomenon where you can access a variable before its declaration line is called Hoisting.
+
+4. Hoisting: Functions vs. Variables
+Hoisting behaves differently depending on whether you are using a variable or a function declaration.
+Function Hoisting
+Because the entire function body is loaded during the Memory Phase, you can call a function before you define it in the code,.
+Code:
+sayHello(); // This works!
+
+function sayHello() {
+  console.log("Hello!");
+}
+* Why it works: In the Memory Phase, sayHello is fully stored. In the Code Phase, when line 1 runs, the function is already available.
+Variable vs. Function Expression
+If you store a function inside a var variable (Function Expression), it behaves like a variable, not a function declaration.
+Code:
+myFunc(); // ERROR: myFunc is not a function
+
+var myFunc = function() {
+  console.log("Hello!");
+}
+* Why it fails: In the Memory Phase, myFunc is treated as a variable, so it is initialized as undefined. When you try to call undefined() in the Code Phase, it throws an error.
+
+5. let, const, and the Temporal Dead Zone (TDZ)
+A common interview question is: "Are let and const hoisted?" Answer: Yes, they are hoisted, but they are stuck in the Temporal Dead Zone,.
+The Code:
+console.log(a); // ERROR: Cannot access 'a' before initialization
+let a = 10;
+Explanation:
+1. Memory Phase: JS allocates memory for a (it is hoisted).
+2. Temporal Dead Zone: However, unlike var, let and const variables are placed in a "dead zone." You cannot touch them until the code execution reaches the line where they are defined.
+3. Code Phase: When console.log(a) tries to run before the definition line, JS throws a Reference Error because the variable is in the TDZ.
+
+6. Function Execution Context
+When a function is called, a new Execution Context is created just for that function.
+The Process:
+1. Creation: A local context is created with its own Memory and Code phases.
+2. Execution: The code inside the function runs.
+3. Deletion: Once the function finishes executing, this local context is deleted.
+4. Return: Control goes back to the Global Execution Context.
+Once the entire script is finished, the Global Execution Context itself is deleted.
+Summary Checklist
+* Global Execution Context: Created first. Has Memory Phase and Code Phase.
+* Memory Phase: Variables = undefined; Functions = body,.
+* Hoisting: The ability to access variables/functions before they are defined in code.
+* Temporal Dead Zone: The period where let/const exist in memory but cannot be accessed yet.
