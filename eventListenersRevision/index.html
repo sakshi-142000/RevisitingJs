@@ -1,0 +1,110 @@
+<!DOCTYPE html5>
+
+<html>
+    <head>
+        <title>Event Listeners</title>
+    </head>
+    <body>
+        <nav class="block">
+            <p>Welcome to my page, <span id="username" onclick="alert('Hey')">Human</span></p>            
+        </nav>
+
+        <div class="block">
+            <h4>
+                Hey. My name is Sakshi
+            </h4>
+
+            <p class="block remove"> Code section</p>
+            <pre><code> console.log('hey there') </code></pre>
+            <!-- Click Event: from Mouse events -->
+             <!-- first way, inline attribute and function call  -->
+              <!-- NOT THE PREFERRED WAY OFC -->
+            <!-- <button onclick="console.log('hey i am clicked')">Click me</button> -->
+           
+           <!-- Second way, using functions -->
+            <!-- <button onclick="handleButtonClick()">Click me</button> -->
+            <button id="btn">Click me</button>
+
+            <script>
+                // removing element clicked by the user
+                const allBodyElements=document.querySelector('body').children;
+                for(let i=0; i<allBodyElements.length; i++){
+                    allBodyElements.item(i).addEventListener('click', ()=>{
+                        allBodyElements.item(i).remove();
+                    });
+                }
+
+
+            </script>
+            <script>
+                const el=document.getElementById('btn');
+                // el.onclick=function(){
+                //     console.log('Button is clicked');
+                //     alert('you clicked the button');
+                // }
+// using arrow functions
+                    el.onclick=()=>{
+                    console.log('Button is clicked');
+                    // alert('you clicked the button');
+                }
+
+
+                // function handleButtonClick(){
+                //     console.log('Button is clicked');
+                //     alert('you clicked the button');
+                // }
+            </script>
+<!-- lets say this is the script from another user now the latest eventListener will work and the previous one will get overridden -->
+<!-- therefore writing functions for event listening is also not very preferred -->
+            <!-- <script>
+                
+                el.onclick=()=>{
+                    alert('Hacked!!');
+                }
+
+            </script> -->
+
+<!-- THE MOST PREFERRED WAY, using addEventListener -->
+            <script>
+                const elToChangeColor=document.querySelector('div.block h4');
+                el.addEventListener('click', ()=>{
+                    console.log('I am the preferred way of capturing events');
+                });
+
+
+                el.addEventListener('click', onClickFunction);
+
+                function onClickFunction(){
+                    console.log('I am the onClickFunction');
+
+                    // //changing text of h4 to red on button click
+                    
+                    // elToChangeColor.style.color='red';
+
+                    //toggle color
+
+                    if(elToChangeColor.style.color==='red') {
+                        elToChangeColor.style.color='blue';
+                    }
+                    else {
+                        elToChangeColor.style.color='red'
+                    }
+
+                }
+
+                // all the addEventListeners will be captured
+            </script>
+        </div>
+    </body>
+
+
+
+
+
+
+    </html>
+
+     <!-- <iframe src="https://www.youtube.com/watch?v=TA5tQ92Hetk&list=PLinedj3B30sDFRdgPYvjnBs2JsDdHPIMv&index=16"> source video</iframe> -->
+            <!-- you need to give the embed code -->
+            <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/tZop-zjYkrU?si=p4-qgoGafVs1AIup" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> -->
+            <!-- <script src="app.js"></script> -->
