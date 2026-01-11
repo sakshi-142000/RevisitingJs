@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Creating Elements Dynamically</title>
+        <style>
+            .place-input {
+                display: block;
+                margin: 10px 0;
+                padding: 8px;
+                width: 300px;
+            }
+        </style>
+    </head>
+    <body>
+        <nav class="block">
+            <p>Welcome to my page, <span id="username" onclick="alert('Hey')">Human</span></p>            
+        </nav>
+
+        <div class="block">
+            <h4>
+                My name is Sakshi
+            </h4>
+
+            <p class="block remove"> Code section</p>
+            <pre><code> console.log('hey there') </code></pre>
+            <button id="btn">Click me</button>
+
+        </div>
+
+        <div id="container-list">
+            <!-- intially empty we will create elements dynamically -->
+
+        </div>
+        <script>
+            const inputName=document.getElementById('username');
+            const name=prompt('please enter your name');
+            inputName.innerText=name;
+        </script>
+        <script>
+
+            const parentContainer=document.getElementById('container-list');
+            const buttonElement=document.getElementById('btn');
+            let count=5;
+            const headingElement=document.createElement('h3');
+            headingElement.innerText='Enter 5 places that you want to visit, by clicking on the button';
+            parentContainer.appendChild(headingElement);
+            let inputTaken=false;
+
+            buttonElement.addEventListener('click', ()=> {
+                if(inputTaken){
+                        return;
+                    }
+               for(let i=0; i<count; i++) {
+                    
+                    const inputEl=document.createElement('input');
+                    inputEl.type="text";
+                    inputEl.className="place-input";
+                    inputEl.placeholder=`Enter the ${i} place you want to visit here`;
+                    parentContainer.appendChild(inputEl);
+                
+               }
+               inputTaken=true;
+               if(inputTaken){
+                buttonElement.innerText='Done';
+                buttonElement.disabled=true;
+               }
+            });
+        </script>
+    </body>
+</html>
